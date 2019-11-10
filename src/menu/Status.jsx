@@ -2,6 +2,7 @@ import React from 'react';
 import {Form,Button} from 'react-bootstrap'
 import axios from 'axios';
 import AlertCom from "../AlertCom";
+import Spinner from "react-spinkit";
 export default class Status extends React.Component{
     constructor(props) {
         super(props);
@@ -16,29 +17,28 @@ export default class Status extends React.Component{
     }
 
     event(){
-
+        this.setState({loader:true});
         axios.get("https://cs-event-nov-2019.herokuapp.com/SpringBootRestApi/api/data/otp/"+this.state.otp)
             .then(res => {
-
                     this.setState({
                         data:res.data,
-                        variant:"success"
+                        variant:"success",
+                        loader:false
                     })
-
-
             }).catch(error => {
                 if(error.response !== undefined && error.response.status === 400){
                     this.setState({
                         message:error.response.data,
-                        variant:"warning"
+                        variant:"warning",
+                        loader:false
                     })
                 }else {
                     this.setState({
                         message: "ERROR:Registration failed, please contact to Admin",
-                        variant: "danger"
+                        variant: "danger",
+                        loader:false
                     })
                 }
-
         });
 
     }
@@ -63,9 +63,14 @@ export default class Status extends React.Component{
                    <Button onClick={this.event} variant="primary" type="submit">
                        Status
                    </Button>
+                   <div className="spinnerEvent">
+                       {this.state.loader?
+                           < Spinner  name="three-bounce" color="Black"/>:""
+                       }
+                   </div>
                    <ul style={{marginTop:"12px"}} className="b">
 
-                       { this.state.data ? Object.entries(this.state.data).map((t,k) => <li><span style={{fontWeight:"bold",color:"#9a9a9a"}}>{t[0].toUpperCase() +" : "}</span>{+t[1]==null?"":t[1]}</li>) :""}
+                       { this.state.data ? Object.entries(this.state.data).map((t,k) => <li><span style={{fontWeight:"bold", color:"#9a9a9a"}}>{t[0].toUpperCase() +" : "}</span>{+t[1]==null?"":t[1]}</li>) :""}
 
                    </ul>
                </Form>

@@ -2,6 +2,7 @@ import React from 'react';
 import {Form,Button} from 'react-bootstrap'
 import axios from 'axios';
 import AlertCom from "../AlertCom";
+import Spinner from 'react-spinkit';
 export default class Event extends React.Component{
     constructor(props) {
         super(props);
@@ -20,7 +21,7 @@ export default class Event extends React.Component{
 
 
     event(){
-
+        this.setState({loader:true});
         axios.put("https://cs-event-nov-2019.herokuapp.com/SpringBootRestApi/api/event",
             {
             "eventName":this.state.event,
@@ -30,7 +31,8 @@ export default class Event extends React.Component{
 
                     this.setState({
                         message:res.data,
-                        variant:"success"
+                        variant:"success",
+                        loader:false
                     })
 
 
@@ -38,12 +40,14 @@ export default class Event extends React.Component{
                 if(error.response !== undefined && error.response.status === 400){
                     this.setState({
                         message:error.response.data,
-                        variant:"warning"
+                        variant:"warning",
+                        loader:false
                     })
                 }else {
                     this.setState({
                         message: "ERROR:Registration failed, please contact to Admin",
-                        variant: "danger"
+                        variant: "danger",
+                        loader:false
                     })
                 }
 
@@ -71,6 +75,11 @@ export default class Event extends React.Component{
                    <Button onClick={this.event} variant="primary" type="submit">
                        Register
                    </Button>
+                   <div className="spinnerEvent">
+                       {this.state.loader?
+                       < Spinner  name="three-bounce" color="Black"/>:""
+                       }
+                   </div>
                </Form>
            </div>
         )
