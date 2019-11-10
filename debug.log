@@ -1,0 +1,10 @@
+[1110/153848.019:WARNING:process_subrange_reader.cc(81)] attempt to read outside of C:\Windows\SYSTEM32\wbemcomn.dll range 0x0 + 0x0 (32) at range 0x0 + 0x40 (32)
+[1110/153848.098:WARNING:pe_image_reader.cc(340)] could not read dos header from C:\Windows\SYSTEM32\wbemcomn.dll
+[1110/153848.098:WARNING:process_subrange_reader.cc(81)] attempt to read outside of C:\Windows\SYSTEM32\wbemcomn.dll range 0x0 + 0x0 (32) at range 0x0 + 0x40 (32)
+[1110/153848.098:WARNING:pe_image_reader.cc(340)] could not read dos header from C:\Windows\SYSTEM32\wbemcomn.dll
+[1110/153848.492:WARNING:process_subrange_reader.cc(81)] attempt to read outside of C:\Windows\SYSTEM32\wbemcomn.dll range 0x0 + 0x0 (32) at range 0x0 + 0x40 (32)
+[1110/153848.492:WARNING:pe_image_reader.cc(340)] could not read dos header from C:\Windows\SYSTEM32\wbemcomn.dll
+[1110/153848.524:WARNING:process_subrange_reader.cc(81)] attempt to read outside of C:\Windows\SYSTEM32\wbemcomn.dll range 0x0 + 0x0 (32) at range 0x0 + 0x40 (32)
+[1110/153848.524:WARNING:pe_image_reader.cc(340)] could not read dos header from C:\Windows\SYSTEM32\wbemcomn.dll
+[1110/153848.524:WARNING:process_subrange_reader.cc(81)] attempt to read outside of C:\Windows\SYSTEM32\wbemcomn.dll range 0x0 + 0x0 (32) at range 0x0 + 0x40 (32)
+[1110/153848.524:WARNING:pe_image_reader.cc(340)] could not read dos header from C:\Windows\SYSTEM32\wbemcomn.dll

@@ -78,3 +78,6 @@ main{
   flex-direction: column;
   height: 100%;
 }
+h5.eventHeader{
+  color:#797979;
+}
