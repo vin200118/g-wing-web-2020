@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
-import { Route, HashRouter} from  'react-router-dom'
+import { Route, HashRouter,Redirect } from  'react-router-dom'
 
 import Event from "./menu/Event";
 import Status from "./menu/Status";
+import Sider from "./Sider";
 
 
 export default class Main extends React.Component{

@@ -3,6 +3,7 @@ import {Form,Button} from 'react-bootstrap'
 import axios from 'axios';
 import AlertCom from "../AlertCom";
 import Spinner from 'react-spinkit';
+import { Redirect } from 'react-router-dom';
 export default class Event extends React.Component{
     constructor(props) {
         super(props);
@@ -10,74 +11,118 @@ export default class Event extends React.Component{
             otp: null,
             message:null,
             variant:null,
-            event:""
+            event:"",
+            redirect:false
         };
-        this.event = this.event.bind(this);
+        this.eventFunc = this.eventFunc.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.renderSwitch = this.renderSwitch.bind(this);
     }
     componentWillMount() {
         this.setState({event : this.props.match.params.eventId.replace("admin_","")});
     }
 
 
-    event(){
-        this.setState({loader:true});
-        axios.put("https://cs-event-nov-2019.herokuapp.com/SpringBootRestApi/api/event",
-            {
-            "eventName":this.state.event,
-            "otp":this.state.otp
-             })
-            .then(res => {
+    eventFunc(){
+        if(this.state.event === "login"){
+            if(this.state.otp === "fox420"){
+                window.localStorage.setItem("password", "fox420");
+                this.setState({
+                    message:"You logged in successfully",
+                    variant:"success",
+                    loader:false,
+                    redirect:true
+                })
+            }else{
+                this.setState({
+                    message:"Please enter valid opt for login",
+                    variant:"warning",
+                    loader:false,
+                    redirect:false
+                })
+            }
+        }else {
+            this.setState({loader: true});
+            axios.put("https://cs-event-nov-2019.herokuapp.com/SpringBootRestApi/api/event",
+                {
+                    "eventName": this.state.event,
+                    "otp": this.state.otp
+                })
+                .then(res => {
 
                     this.setState({
-                        message:res.data,
-                        variant:"success",
-                        loader:false
+                        message: res.data,
+                        variant: "success",
+                        loader: false,
+                        redirect:false
                     })
 
 
-            }).catch(error => {
-                if(error.response !== undefined && error.response.status === 400){
+                }).catch(error => {
+                if (error.response !== undefined && error.response.status === 400) {
                     this.setState({
-                        message:error.response.data,
-                        variant:"warning",
-                        loader:false
+                        message: error.response.data,
+                        variant: "warning",
+                        loader: false,
+                        redirect:false
                     })
-                }else {
+                } else {
                     this.setState({
                         message: "ERROR:Registration failed, please contact to Admin",
                         variant: "danger",
-                        loader:false
+                        loader: false,
+                        redirect:false
                     })
                 }
 
-        });
+            });
+        }
 
     }
+    renderSwitch() {
+     switch (this.state.event) {
+         case 'login':
+             return 'login';
+         case 'registration':
+             return 'Registration';
+         case 'gift':
+             return 'Gift Received';
+         case 'lunch':
+             return 'Lunch Received';
+         default:
+             return 'foo';
+     }
+     }
+
     handleChange(e){
         this.setState({
             [e.target.id]: e.target.value
         })
     }
     render() {
+        if (this.state.redirect === true) {
+            /*return <Redirect to='/event/registration' />*/
+            document.getElementById("form").style.display="none";
+        }
         return(
 
-           <div className="menuDetails">
+           <div id="Login" className="menuDetails">
               <AlertCom variant={this.state.variant} message={this.state.message} />
 
-               <Form>
+               <Form id="form">
                    <Form.Group controlId="formBasicOTP">
                        <h5 className="eventHeader">{this.state.event.toUpperCase()+" :"}</h5>
                        <Form.Control id="otp" value={this.state.otp}
                                      onChange={e => this.handleChange(e)} type="input" placeholder={"Enter OTP for "+this.state.event} />
                    </Form.Group>
-
-                   <Button onClick={this.event} variant="primary" type="submit">
-                       Register
-                   </Button>
+                   {window.localStorage.getItem("password") === "fox420" || (window.localStorage.getItem("permission") === "admin" && this.state.event === "login") || this.state.event === "registration"?
+                       <Button onClick={this.eventFunc} variant="primary" type="submit">
+                           {this.renderSwitch()}
+                       </Button>:""
+                   }
                    <div className="spinnerEvent">
                        {this.state.loader?
-                       < Spinner  name="three-bounce" color="Black"/>:""
+                       <Spinner  name="three-bounce" color="Black"/>:""
                        }
                    </div>
                </Form>
