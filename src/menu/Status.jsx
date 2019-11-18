@@ -21,7 +21,7 @@ export default class Status extends React.Component{
         axios.get("https://cs-event-nov-2019.herokuapp.com/SpringBootRestApi/api/data/otp/"+this.state.otp)
             .then(res => {
                     this.setState({
-                        data:res.data,
+                        message:"OTP exists",
                         variant:"success",
                         loader:false
                     })

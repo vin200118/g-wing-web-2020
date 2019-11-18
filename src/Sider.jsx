@@ -9,7 +9,7 @@ export default class Sider extends React.Component{
     openLeftMenu() {
         this.setState({"dummy":"empty"})
         document.getElementById("leftMenu").style.display = "block";
-        window.location.href ="#";
+       // window.location.href ="#";
     }
 
      closeLeftMenu() {
@@ -19,7 +19,7 @@ export default class Sider extends React.Component{
         document.getElementById("leftMenu").style.display = "none";
         this.setState({"dummy":"empty"})
         window.localStorage.setItem("password","");
-        window.location.href ="#";
+      //  window.location.href ="#";
 
     }
 

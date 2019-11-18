@@ -4,7 +4,6 @@ import { Route, HashRouter,Redirect } from  'react-router-dom'
 
 import Event from "./menu/Event";
 import Status from "./menu/Status";
-import Sider from "./Sider";
 
 
 export default class Main extends React.Component{
