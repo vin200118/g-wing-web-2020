@@ -23,7 +23,8 @@ export default class Event extends React.Component{
     }
 
 
-    eventFunc(){
+    eventFunc(e){
+        e.preventDefault();
         if(this.state.event === "login"){
             if(this.state.otp === "fox420"){
                 window.localStorage.setItem("password", "fox420");
@@ -35,7 +36,7 @@ export default class Event extends React.Component{
                 })
             }else{
                 this.setState({
-                    message:"Please enter valid opt for login",
+                    message:"Please enter valid otp for login",
                     variant:"warning",
                     loader:false,
                     redirect:false
@@ -116,7 +117,7 @@ export default class Event extends React.Component{
                                      onChange={e => this.handleChange(e)} type="input" placeholder={"Enter OTP for "+this.state.event} />
                    </Form.Group>
                    {window.localStorage.getItem("password") === "fox420" || (window.localStorage.getItem("permission") === "admin" && this.state.event === "login") || this.state.event === "registration"?
-                       <Button onClick={this.eventFunc} variant="primary" type="submit">
+                       <Button onClick={(e) => {this.eventFunc(e)}} variant="primary" type="submit">
                            {this.renderSwitch()}
                        </Button>:""
                    }
