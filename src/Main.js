@@ -12,7 +12,6 @@ export default class Main extends React.Component{
                 <div className="content">
                     <HashRouter>
                         <Route path="/registration" component={Registration}/>
-                        
                             <Route path="/login" component={Login}/>
                     </HashRouter>
                 </div>
