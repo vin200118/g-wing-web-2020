@@ -67,6 +67,7 @@ export default class Status extends React.Component{
                    <div className="spinnerEvent">
                        {this.state.loader?
                            < Spinner  name="three-bounce" color="Black"/>:""
+
                        }
                    </div>
                    <ul style={{marginTop:"12px"}} className="b">
@@ -79,4 +80,3 @@ export default class Status extends React.Component{
         )
     }
 }
-

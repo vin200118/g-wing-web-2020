@@ -18,8 +18,12 @@ export default class Event extends React.Component{
         this.handleChange = this.handleChange.bind(this);
         this.renderSwitch = this.renderSwitch.bind(this);
     }
-    componentWillMount() {
-        this.setState({event : this.props.match.params.eventId.replace("admin_","")});
+    componentDidMount() {
+        this.setState({event : this.props.match.params.eventId.replace("admin_",""),message:null});
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        this.setState({event : nextProps.match.params.eventId.replace("admin_",""),message:null});
     }
 
 
@@ -124,6 +128,7 @@ export default class Event extends React.Component{
                    <div className="spinnerEvent">
                        {this.state.loader?
                        <Spinner  name="three-bounce" color="Black"/>:""
+
                        }
                    </div>
                </Form>
@@ -131,4 +136,3 @@ export default class Event extends React.Component{
         )
     }
 }
-
