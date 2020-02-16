@@ -62,7 +62,7 @@ export default class Login extends React.Component{
 
                   }).catch(error => {
 
-                      if(error.response !== undefined && error.response.status === 401){
+                      if(error.response !== undefined && error.response.status != 500){
                           this.setState({
                               message:error.response.data,
                               variant:"danger",

@@ -42,7 +42,8 @@ export default class Sider extends React.Component{
                               :
                               <div>
                                   <a onClick={this.closeLeftMenu} href="#/home" className="w3-bar-item w3-button">Home</a>
-                                  <a onClick={this.closeLeftMenu} href="#/registration" className="w3-bar-item w3-button">Profile</a>
+                                  <a onClick={this.closeLeftMenu} href="#/userList" className="w3-bar-item w3-button">Users</a>
+                                <a onClick={this.closeLeftMenu} href="#/registration" className="w3-bar-item w3-button">Profile</a>
                                   <a onClick={this.logoutfun} href="#/login" className="w3-bar-item w3-button">Logout</a>
                               </div>
                             }
@@ -51,7 +52,7 @@ export default class Sider extends React.Component{
                     <div className="w3-teal">
                         <button className="w3-button w3-teal w3-xlarge w3-left"
                                 onClick={this.openLeftMenu}>&#9776;</button>
-                              <span className="headerTitle">G Wing</span>
+                              <span className="headerTitle">Tamarind park - G Wing</span>
 
                     </div>
 

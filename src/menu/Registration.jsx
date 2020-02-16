@@ -195,7 +195,11 @@ export default class Registration extends React.Component{
   render(){
     return (
       <div id="box">
-          <h6 class="headline">{this.state.title}:</h6>
+          <h6 class="headline">{this.state.title}: <div className="spinnerEvent">
+                          {this.state.loader?
+                              < Spinner  name="three-bounce" color="Black"/>:""
+                        }
+          </div></h6>
             <AlertCom variant={this.state.variant} message={this.state.message} />
       <form  class="col s12 ">
         <div class="row">
