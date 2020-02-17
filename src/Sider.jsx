@@ -36,15 +36,15 @@ export default class Sider extends React.Component{
                           { window.localStorage.getItem("userDetails") === null ||
                              window.localStorage.getItem("userDetails") === "" ?
                             <div>
-                              <a onClick={this.closeLeftMenu} href="#/registration" className="w3-bar-item w3-button">Sign up</a>
-                                <a onClick={this.closeLeftMenu} href="#/login" className="w3-bar-item w3-button">Log in</a>
+                              <a onClick={this.closeLeftMenu} href="#/registration" className="w3-bar-item w3-button menu-link">Sign up</a>
+                                <a onClick={this.closeLeftMenu} href="#/login" className="w3-bar-item w3-button menu-link">Log in</a>
                               </div>
                               :
                               <div>
-                                  <a onClick={this.closeLeftMenu} href="#/home" className="w3-bar-item w3-button">Home</a>
-                                  <a onClick={this.closeLeftMenu} href="#/userList" className="w3-bar-item w3-button">Users</a>
-                                <a onClick={this.closeLeftMenu} href="#/registration" className="w3-bar-item w3-button">Profile</a>
-                                  <a onClick={this.logoutfun} href="#/login" className="w3-bar-item w3-button">Logout</a>
+                                  <a onClick={this.closeLeftMenu} href="#/home" className="w3-bar-item w3-button menu-link">Home</a>
+                                  <a onClick={this.closeLeftMenu} href="#/userList" className="w3-bar-item w3-button menu-link">Users</a>
+                                <a onClick={this.closeLeftMenu} href="#/registration" className="w3-bar-item w3-button menu-link">Profile</a>
+                                  <a onClick={this.logoutfun} href="#/login" className="w3-bar-item w3-button menu-link">Logout</a>
                               </div>
                             }
 

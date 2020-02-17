@@ -7,7 +7,7 @@ export default class Home extends React.Component{
 
   render(){
     return (
-        <div> Welcome to Tamarind park G wing...</div>
+        <div> Welcome to Tamarind park G wing... click on left side bar to see menu options</div>
     )
   }
 }

@@ -97,6 +97,21 @@ float:right;
   box-shadow: 5px 10px 18px #888888;
 }
 .headline{
-  background-color: orange;
-    padding: 12px;
+  padding: 12px;
+    border-bottom-style: solid;
+    border-bottom-color: #006d40;
+    box-shadow: 0px 8px 8px -7px #024c45;
+    color: #006951;
 }
+.waves-effect {
+      color:purple;
+  }
+  .note-message{
+    color: #a90000;
+    font-size: 13px;
+  }
+  .menu-link{
+    font-size: 17px;
+    color: rgb(0, 105, 81);
+    font-style: italic;
+  }

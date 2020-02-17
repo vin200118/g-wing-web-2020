@@ -118,13 +118,6 @@ export default class Registration extends React.Component{
                       loader:false
                   })
                     return;
-                }else if(this.state.contactNo2 === "" ){
-                  this.setState({
-                      message:"enter contact no2",
-                      variant:"danger",
-                      loader:false
-                  })
-                    return;
                 }
                 if(this.state.newPassword !== this.state.confirmPassword){
                   this.setState({
@@ -140,11 +133,6 @@ export default class Registration extends React.Component{
                 })
 
 
-                console.log("flatNo : "+this.state.flatNo);
-                console.log("fullName : "+this.state.fullName);
-                console.log("password : "+this.state.newPassword);
-                console.log("contactNo1 : "+this.state.contactNo1);
-                console.log("contactNo2 : "+this.state.contactNo2);
 
               axios.post(this.state.url,
                 {"flatNo":this.state.flatNo,
@@ -195,7 +183,7 @@ export default class Registration extends React.Component{
   render(){
     return (
       <div id="box">
-          <h6 class="headline">{this.state.title}: <div className="spinnerEvent">
+          <h6 class="headline">{this.state.title} <div className="spinnerEvent">
                           {this.state.loader?
                               < Spinner  name="three-bounce" color="Black"/>:""
                         }
@@ -205,10 +193,11 @@ export default class Registration extends React.Component{
         <div class="row">
           <div class="input-field col s6">
  <FormControl >
-               <InputLabel id="flatNo-label">Flot No</InputLabel>
+               <InputLabel id="flatNo-label">Flat No</InputLabel>
                <Select style={{width:140}}
                  labelId="flatNo-label"
                  id="flatNo"
+                 required="true"
                  value={this.state.flatNo}
                  onChange={this.handleChangeFlatNo}
                >
@@ -277,32 +266,32 @@ export default class Registration extends React.Component{
 </div></div>
      <div class="row">
        <div class="input-field col s6">
-         <input id="newPassword" value={this.state.newPassword}  maxlength="4" type="text" class="validate" onChange={e => this.handleChange(e)}/>
-           <label for="newPassword">New Password</label>
+         <input id="newPassword" required="true" value={this.state.newPassword}  maxlength="4" type="text" class="validate" onChange={e => this.handleChange(e)}/>
+           <label for="newPassword">New Password</label><span class="note-message">Your password should be four numbers digit</span>
        </div>
      </div>
      <div class="row">
        <div class="input-field col s6">
-         <input id="confirmPassword" value={this.state.confirmPassword}  maxlength="4" type="text" class="validate" onChange={e => this.handleChange(e)}/>
-           <label for="confirmPassword">Confirm Password</label>
+         <input id="confirmPassword" required="true" value={this.state.confirmPassword}  maxlength="4" type="text" class="validate" onChange={e => this.handleChange(e)}/>
+           <label for="confirmPassword">Confirm Password</label><span class="note-message">Your password should be four numbers digit</span>
        </div>
      </div>
      <div class="row">
        <div class="input-field col s6">
-         <input id="fullName" value={this.state.fullName1} type="text" class="validate" onChange={e => this.handleChangeFullName(e)}/>
+         <input id="fullName" value={this.state.fullName1} required="true" type="text" class="validate" onChange={e => this.handleChangeFullName(e)}/>
            <label for="fullName">Full Name</label>
        </div>
      </div>
      <div class="row">
        <div class="input-field col s6">
-         <input id="contactNo1" value={this.state.contactNo1} maxlength="10" type="text" class="validate" onChange={e => this.handleChange(e)}/>
-           <label for="contactNo1">Contact No1</label>
+         <input id="contactNo1" value={this.state.contactNo1} required="true" maxlength="10" type="text" class="validate" onChange={e => this.handleChange(e)}/>
+           <label for="contactNo1">Contact No1</label><span class="note-message">Your contact1 should be ten numbers digit</span>
        </div>
      </div>
      <div class="row">
        <div class="input-field col s6">
          <input id="contactNo2" value={this.state.contactNo2}  type="text" maxlength="10" onChange={e => this.handleChange(e)}/>
-           <label for="contactNo2">Contact No2</label>
+           <label for="contactNo2">Contact No2</label><span class="note-message">optional</span>
        </div>
      </div>
      <a class="waves-effect waves-light btn-small" onClick={this.signUp}>{this.state.submitButtonTitle}</a>

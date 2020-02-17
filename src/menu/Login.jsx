@@ -22,7 +22,7 @@ export default class Login extends React.Component{
       componentWillMount() {
           if(this.props.location.search != undefined &&  this.props.location.search.includes("done")){
             this.setState({
-                message:"You are done with the singup.",
+                message:"Your account created successfully...",
                 variant:"success",
                 loader:false
             })
@@ -83,7 +83,7 @@ export default class Login extends React.Component{
 
     return (
       <div id="box">
-        <h6 class="headline">Log in to your account:</h6>
+        <h6 class="headline">Log in to your account</h6>
       <form class="col s12">
       <AlertCom variant={this.state.variant} message={this.state.message} />
 
@@ -99,65 +99,65 @@ export default class Login extends React.Component{
               value={this.state.flatNo}
               onChange={this.handleChangeFlatNo}
             >
-            <option value={"G-101"}>G-101</option>
-             <option value={"G-102"}>G-102</option>
-             <option value={"G-103"}>G-103</option>
-             <option value={"G-104"}>G-104</option>
+            <MenuItem value={"G-101"}>G-101</MenuItem>
+         <MenuItem value={"G-102"}>G-102</MenuItem>
+         <MenuItem value={"G-103"}>G-103</MenuItem>
+         <MenuItem value={"G-104"}>G-104</MenuItem>
 
-               <option value={"G-201"}>G-201</option>
-               <option value={"G-202"}>G-202</option>
-               <option value={"G-203"}>G-203</option>
-               <option value={"G-204"}>G-204</option>
+           <MenuItem value={"G-201"}>G-201</MenuItem>
+           <MenuItem value={"G-202"}>G-202</MenuItem>
+           <MenuItem value={"G-203"}>G-203</MenuItem>
+           <MenuItem value={"G-204"}>G-204</MenuItem>
 
-                 <option value={"G-301"}>G-301</option>
-                 <option value={"G-302"}>G-302</option>
-                 <option value={"G-303"}>G-303</option>
-                 <option value={"G-304"}>G-304</option>
+             <MenuItem value={"G-301"}>G-301</MenuItem>
+             <MenuItem value={"G-302"}>G-302</MenuItem>
+             <MenuItem value={"G-303"}>G-303</MenuItem>
+             <MenuItem value={"G-304"}>G-304</MenuItem>
 
-                   <option value={"G-401"}>G-401</option>
-                   <option value={"G-402"}>G-402</option>
-                   <option value={"G-403"}>G-403</option>
-                   <option value={"G-404"}>G-404</option>
+               <MenuItem value={"G-401"}>G-401</MenuItem>
+               <MenuItem value={"G-402"}>G-402</MenuItem>
+               <MenuItem value={"G-403"}>G-403</MenuItem>
+               <MenuItem value={"G-404"}>G-404</MenuItem>
 
-                     <option value={"G-501"}>G-501</option>
-                     <option value={"G-502"}>G-502</option>
-                     <option value={"G-503"}>G-503</option>
-                     <option value={"G-504"}>G-504</option>
+                 <MenuItem value={"G-501"}>G-501</MenuItem>
+                 <MenuItem value={"G-502"}>G-502</MenuItem>
+                 <MenuItem value={"G-503"}>G-503</MenuItem>
+                 <MenuItem value={"G-504"}>G-504</MenuItem>
 
-                       <option value={"G-601"}>G-601</option>
-                       <option value={"G-602"}>G-602</option>
-                       <option value={"G-603"}>G-603</option>
-                       <option value={"G-604"}>G-604</option>
+                   <MenuItem value={"G-601"}>G-601</MenuItem>
+                   <MenuItem value={"G-602"}>G-602</MenuItem>
+                   <MenuItem value={"G-603"}>G-603</MenuItem>
+                   <MenuItem value={"G-604"}>G-604</MenuItem>
 
-                         <option value={"G-701"}>G-701</option>
-                         <option value={"G-702"}>G-702</option>
-                         <option value={"G-703"}>G-703</option>
-                         <option value={"G-704"}>G-704</option>
+                     <MenuItem value={"G-701"}>G-701</MenuItem>
+                     <MenuItem value={"G-702"}>G-702</MenuItem>
+                     <MenuItem value={"G-703"}>G-703</MenuItem>
+                     <MenuItem value={"G-704"}>G-704</MenuItem>
 
-                           <option value={"G-801"}>G-801</option>
-                           <option value={"G-802"}>G-802</option>
-                           <option value={"G-803"}>G-803</option>
-                           <option value={"G-804"}>G-804</option>
+                       <MenuItem value={"G-801"}>G-801</MenuItem>
+                       <MenuItem value={"G-802"}>G-802</MenuItem>
+                       <MenuItem value={"G-803"}>G-803</MenuItem>
+                       <MenuItem value={"G-804"}>G-804</MenuItem>
 
-                             <option value={"G-901"}>G-901</option>
-                             <option value={"G-902"}>G-902</option>
-                             <option value={"G-903"}>G-903</option>
-                             <option value={"G-904"}>G-904</option>
+                         <MenuItem value={"G-901"}>G-901</MenuItem>
+                         <MenuItem value={"G-902"}>G-902</MenuItem>
+                         <MenuItem value={"G-903"}>G-903</MenuItem>
+                         <MenuItem value={"G-904"}>G-904</MenuItem>
 
-                               <option value={"G-1001"}>G-1001</option>
-                               <option value={"G-1002"}>G-1002</option>
-                               <option value={"G-1003"}>G-1003</option>
-                               <option value={"G-1004"}>G-1004</option>
+                           <MenuItem value={"G-1001"}>G-1001</MenuItem>
+                           <MenuItem value={"G-1002"}>G-1002</MenuItem>
+                           <MenuItem value={"G-1003"}>G-1003</MenuItem>
+                           <MenuItem value={"G-1004"}>G-1004</MenuItem>
 
-                                 <option value={"G-1101"}>G-1101</option>
-                                 <option value={"G-1102"}>G-1102</option>
-                                 <option value={"G-1103"}>G-1103</option>
-                                 <option value={"G-1104"}>G-1104</option>
+                             <MenuItem value={"G-1101"}>G-1101</MenuItem>
+                             <MenuItem value={"G-1102"}>G-1102</MenuItem>
+                             <MenuItem value={"G-1103"}>G-1103</MenuItem>
+                             <MenuItem value={"G-1104"}>G-1104</MenuItem>
 
-                                   <option value={"G-1201"}>G-1201</option>
-                                   <option value={"G-1202"}>G-1202</option>
-                                   <option value={"G-1203"}>G-1203</option>
-                                   <option value={"G-1204"}>G-1204</option>
+                               <MenuItem value={"G-1201"}>G-1201</MenuItem>
+                               <MenuItem value={"G-1202"}>G-1202</MenuItem>
+                               <MenuItem value={"G-1203"}>G-1203</MenuItem>
+                               <MenuItem value={"G-1204"}>G-1204</MenuItem>
             </Select>
 
      </FormControl >
@@ -168,6 +168,8 @@ export default class Login extends React.Component{
        <div class="input-field col s3">
        <input id="password" maxlength="4"  type="password" class="validate" onChange={e => this.handleChange(e)}/>
        <label for="password">Password</label>
+       <span class="note-message">Your password should be four numbers digit</span>
+
        </div>
      </div>
      <a class="waves-effect waves-light btn-small" onClick={this.login}>Log In</a>
