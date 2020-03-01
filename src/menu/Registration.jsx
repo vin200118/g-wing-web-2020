@@ -23,6 +23,7 @@ export default class Registration extends React.Component{
             confirmPassword:"",
             contactNo1:"",
             contactNo2:"",
+            role_name:"",
             "title":"Profile",
             "submitButtonTitle":"Update",
             "url":"https://tam-g-wing.herokuapp.com/gwing/api/user"
@@ -47,6 +48,7 @@ export default class Registration extends React.Component{
                          "title":"Profile",
                          "id":userInfo["user_id"],
                          "submitButtonTitle":"Update",
+                         "role_name":userInfo["role_name"],
                        "url":"https://tam-g-wing.herokuapp.com/gwing/api/user/update"});
               }else{
                   this.setState({ "title":"Sign Up",
@@ -129,6 +131,7 @@ export default class Registration extends React.Component{
                                   "full_name":this.state.fullName,
                                   "contact_no1":this.state.contactNo1,
                                   "id":this.state.id,
+                                  "role_name":this.state.role_name,
                                   "contact_no2":this.state.contactNo2}
                                    window.localStorage.setItem("userDetails", JSON.stringify(data));
                                    this.setState({
