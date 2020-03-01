@@ -1,138 +1,268 @@
 import React from 'react';
-import {Form,Button} from 'react-bootstrap'
 import axios from 'axios';
 import AlertCom from "../AlertCom";
 import Spinner from 'react-spinkit';
 import { Redirect } from 'react-router-dom';
-export default class Event extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            otp: null,
-            message:null,
-            variant:null,
-            event:"",
-            redirect:false
-        };
-        this.eventFunc = this.eventFunc.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.renderSwitch = this.renderSwitch.bind(this);
-    }
-    componentDidMount() {
-        this.setState({event : this.props.match.params.eventId.replace("admin_",""),message:null});
-    }
+import EventStatusDropDown from '../common/EventStatusDropDown';
+import AlertDialogSlide from '../common/AlertDialogSlide'
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+import Button from '@material-ui/core/Button';
+export default class Home extends React.Component{
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        this.setState({event : nextProps.match.params.eventId.replace("admin_",""),message:null});
+  constructor(props) {
+      super(props);
+      this.state = {
+          status:"in_progress",
+            data:[]
+      };
+      this.handleChange = this.handleChange.bind(this);
+      this.handleChangeEventCost = this.handleChangeEventCost.bind(this);
+      this.handleChangeStatus = this.handleChangeStatus.bind(this);
+      this.edit = this.edit.bind(this);
+      this.delete = this.delete.bind(this);
+        this.add = this.add.bind(this);
+      }
+  componentDidMount(){
+    if(window.localStorage.getItem("userDetails") === null ||
+       window.localStorage.getItem("userDetails") === "" ){
+           this.props.history.push("/login");
+       }
+
+       if(window.localStorage.getItem("userDetails") != null &&
+          window.localStorage.getItem("userDetails") != "" &&
+          JSON.parse(window.localStorage.getItem("userDetails"))["role_name"]!=="account"){
+              this.props.history.push("/login");
+          }
+       axios.get("https://tam-g-wing.herokuapp.com/gwing/api/event")
+                 .then(res => {
+                     this.setState({"data":res.data,loader:false});
+                 }).catch(error => {
+
+                     if(error.response !== undefined && error.response.status != 500){
+                         this.setState({
+                             message:error.response.data,
+                             variant:"danger",
+                             loader:false
+                         })
+                     }else {
+                         this.setState({
+                             message: "ERROR:Registration failed, please contact to Admin",
+                             variant: "danger",
+                             loader:false
+                         })
+                     }
+             });
+  }
+
+  add(){
+    this.setState({loader:true});
+    const headers = {
+        'Content-Type': 'application/json',
     }
-
-
-    eventFunc(e){
-        e.preventDefault();
-        if(this.state.event === "login"){
-            if(this.state.otp === "fox420"){
-                window.localStorage.setItem("password", "fox420");
+    let url="";
+    let model={}
+    if(this.state.eventId != null){
+      url="https://tam-g-wing.herokuapp.com/gwing/api/event/update";
+      model={"eventId":this.state.eventId,"status":this.state.status,"eventCost":this.state.eventCost,
+      "eventName":this.state.eventName.trim()}
+    }else{
+      url="https://tam-g-wing.herokuapp.com/gwing/api/event"
+      model={"status":this.state.status,"eventCost":this.state.eventCost,
+      "eventName":this.state.eventName}
+    }
+    axios.post(url,model,{"headers":headers})
+              .then(res => {
                 this.setState({
-                    message:"You logged in successfully",
+                    message:"Event added successfully",
                     variant:"success",
                     loader:false,
-                    redirect:true
+                    eventId:null,
+                    status:"",
+                    eventCost:"",
+                    eventName:""
+
                 })
-            }else{
+                axios.get("https://tam-g-wing.herokuapp.com/gwing/api/event")
+                          .then(res => {
+                              this.setState({"data":res.data,loader:false});
+                          }).catch(error => {
+
+                              if(error.response !== undefined && error.response.status != 500){
+                                  this.setState({
+                                      message:error.response.data,
+                                      variant:"danger",
+                                      loader:false
+                                  })
+                              }else {
+                                  this.setState({
+                                      message: "ERROR:Registration failed, please contact to Admin",
+                                      variant: "danger",
+                                      loader:false
+                                  })
+                              }
+                      });
+
+              }).catch(error => {
+
+                  if(error.response !== undefined && error.response.status != 500){
+                      this.setState({
+                          message:error.response.data,
+                          variant:"danger",
+                          loader:false
+                      })
+                  }else {
+                      this.setState({
+                          message: "ERROR:Registration failed, please contact to Admin",
+                          variant: "danger",
+                          loader:false
+                      })
+                  }
+          });
+  }
+  delete(id){
+    axios.delete("https://tam-g-wing.herokuapp.com/gwing/api/event/"+id)
+              .then(res => {
                 this.setState({
-                    message:"Please enter valid otp for login",
-                    variant:"warning",
+                    message:"Event deleted successfully",
+                    variant:"success",
                     loader:false,
-                    redirect:false
+                    eventId:null,
+                    status:"",
+                    eventCost:"",
+                    eventName:""
+
                 })
-            }
-        }else {
-            this.setState({loader: true});
-            axios.put("https://cs-event-nov-2019.herokuapp.com/SpringBootRestApi/api/event",
-                {
-                    "eventName": this.state.event,
-                    "otp": this.state.otp
-                })
-                .then(res => {
+                axios.get("https://tam-g-wing.herokuapp.com/gwing/api/event")
+                          .then(res => {
+                              this.setState({"data":res.data,loader:false});
+                          }).catch(error => {
 
-                    this.setState({
-                        message: res.data,
-                        variant: "success",
-                        loader: false,
-                        redirect:false
-                    })
+                              if(error.response !== undefined && error.response.status != 500){
+                                  this.setState({
+                                      message:error.response.data,
+                                      variant:"danger",
+                                      loader:false
+                                  })
+                              }else {
+                                  this.setState({
+                                      message: "ERROR:Registration failed, please contact to Admin",
+                                      variant: "danger",
+                                      loader:false
+                                  })
+                              }
+                      });
 
+              }).catch(error => {
 
-                }).catch(error => {
-                if (error.response !== undefined && error.response.status === 400) {
-                    this.setState({
-                        message: error.response.data,
-                        variant: "warning",
-                        loader: false,
-                        redirect:false
-                    })
-                } else {
-                    this.setState({
-                        message: "ERROR:Registration failed, please contact to Admin",
-                        variant: "danger",
-                        loader: false,
-                        redirect:false
-                    })
-                }
+                  if(error.response !== undefined && error.response.status != 500){
+                      this.setState({
+                          message:error.response.data,
+                          variant:"danger",
+                          loader:false
+                      })
+                  }else {
+                      this.setState({
+                          message: "ERROR:Registration failed, please contact to Admin",
+                          variant: "danger",
+                          loader:false
+                      })
+                  }
+          });
+  }
 
-            });
-        }
-
-    }
-    renderSwitch() {
-     switch (this.state.event) {
-         case 'login':
-             return 'login';
-         case 'registration':
-             return 'Registration';
-         case 'gift':
-             return 'Gift Received';
-         case 'lunch':
-             return 'Lunch Received';
-         default:
-             return 'foo';
-     }
-     }
-
-    handleChange(e){
+  edit(id,eventName, eventCost, eventStatus){
+    this.setState({"eventId":id,"status":eventStatus, "eventCost":eventCost, "eventName":eventName});
+  }
+  handleChangeStatus(e){
         this.setState({
-            [e.target.id]: e.target.value
+            "status":  e.target.value
         })
     }
-    render() {
-        if (this.state.redirect === true) {
-            /*return <Redirect to='/event/registration' />*/
-            document.getElementById("form").style.display="none";
-        }
-        return(
 
-           <div id="Login" className="menuDetails">
-              <AlertCom variant={this.state.variant} message={this.state.message} />
-
-               <Form id="form">
-                   <Form.Group controlId="formBasicOTP">
-                       <h5 className="eventHeader">{this.state.event.toUpperCase()+" :"}</h5>
-                       <Form.Control id="otp" value={this.state.otp}
-                                     onChange={e => this.handleChange(e)} type="input" placeholder={"Enter OTP for "+this.state.event} />
-                   </Form.Group>
-                   {window.localStorage.getItem("password") === "fox420" || (window.localStorage.getItem("permission") === "admin" && this.state.event === "login") || this.state.event === "registration"?
-                       <Button onClick={(e) => {this.eventFunc(e)}} variant="primary" type="submit">
-                           {this.renderSwitch()}
-                       </Button>:""
-                   }
-                   <div className="spinnerEvent">
-                       {this.state.loader?
-                       <Spinner  name="three-bounce" color="Black"/>:""
-
-                       }
-                   </div>
-               </Form>
-           </div>
-        )
+  handleChange(e){
+    this.setState({
+          [e.target.id]:  e.target.value
+      })
     }
+
+  handleChangeEventCost(e){
+    const re = /^[0-9\b]+$/;
+    if (e.target.value === '' || re.test(e.target.value)) {
+      this.setState({
+          [e.target.id]:  e.target.value.trim()
+      })
+    }
+    }
+
+  render(){
+    return (
+      <div id="box">
+        <h6 class="headline">Add Update Event</h6>
+      <form class="col s12">
+      <AlertCom variant={this.state.variant} message={this.state.message} />
+
+
+        <div class="row">
+          <div class="input-field col s6">
+             <input value={this.state.eventName} id="eventName" type="text" class="validate" onChange={e => this.handleChange(e)}/>
+              <label for="eventName">Event Name</label>
+   </div>
+ </div>
+
+     <div class="row">
+       <div class="input-field col s3">
+       <input value={this.state.eventCost} id="eventCost" maxlength="4"  type="number" class="validate" onChange={e => this.handleChangeEventCost(e)}/>
+       <label for="eventCost">Event Cost</label>
+       </div>
+     </div>
+
+     <div class="row">
+       <div class="input-field col s6">
+           <EventStatusDropDown status={this.state.status} handleChangeStatus={this.handleChangeStatus} />
+         </div>
+      </div>
+
+     <a class="waves-effect waves-light btn-small" onClick={this.add}>Save/Update</a>
+       <div className="spinnerEvent">
+                      {this.state.loader?
+                          < Spinner  name="three-bounce" color="Black"/>:""
+                    }
+      </div>
+
+      <table class="striped">
+        <thead>
+          <tr>
+              <th>Event Name</th>
+              <th>Cost</th>
+              <th>Status</th>
+              <th>Edit</th>
+          </tr>
+        </thead>
+
+        <tbody>
+      {this.state.data.map(( event, index ) => {
+       return (
+
+         <tr key={index++}>
+           <td>{event.eventname}</td>
+           <td>{event.eventcost}</td>
+           <td>{event.status == "in_progress"?"P":"C"}</td>
+           <td>
+             <button onClick={() => this.edit(event.eventid,event.eventname,event.eventcost,event.status)}  class="btn waves-effect waves-light red">
+                 <i class="material-icons-two-tone md-12">edit</i></button>
+                 <AlertDialogSlide eventId={event.eventid} onClickEvent={this.delete}></AlertDialogSlide> </td>
+         </tr>
+       );
+     })}
+       </tbody>
+     </table>
+    </form>
+    </div>
+    )
+  }
 }

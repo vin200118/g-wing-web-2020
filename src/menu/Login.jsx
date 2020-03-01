@@ -13,7 +13,8 @@ export default class Login extends React.Component{
       super(props);
       this.state = {
           password:null,
-          flatNo:""
+          flatNo:"",
+          loginBtnDisabled:false
       };
       this.handleChange = this.handleChange.bind(this);
       this.handleChangeFlatNo=this.handleChangeFlatNo.bind(this);
@@ -48,7 +49,7 @@ export default class Login extends React.Component{
 
 
     login(){
-        this.setState({loader:true});
+        this.setState({loader:true, loginBtnDisabled:true});
         const headers = {
             'Content-Type': 'application/json',
         }
@@ -67,13 +68,15 @@ export default class Login extends React.Component{
                           this.setState({
                               message:error.response.data,
                               variant:"danger",
-                              loader:false
+                              loader:false,
+                              loginBtnDisabled:false
                           })
                       }else {
                           this.setState({
                               message: "ERROR:Registration failed, please contact to Admin",
                               variant: "danger",
-                              loader:false
+                              loader:false,
+                              loginBtnDisabled:false
                           })
                       }
               });
@@ -103,8 +106,9 @@ export default class Login extends React.Component{
 
        </div>
      </div>
-     <a class="waves-effect waves-light btn-small" onClick={this.login}>Log In</a>
-       <div className="spinnerEvent">
+     <a disabled={this.state.loginBtnDisabled} class="waves-effect waves-light btn-small" onClick={this.login}>Log In</a>
+<a style={{"marginLeft":"20px","fontSize":"15px"}} onClick={this.closeLeftMenu} href="#/registration" className="menu-link">Sign up</a>
+     <div className="spinnerEvent">
                       {this.state.loader?
                           < Spinner  name="three-bounce" color="Black"/>:""
                     }

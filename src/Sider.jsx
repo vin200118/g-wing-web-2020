@@ -27,7 +27,6 @@ export default class Sider extends React.Component{
     }
 
     render() {
-
         return(
             <div>
                 <div className="w3-sidebar w3-bar-block w3-card w3-animate-left" style={{display:"none"}} id="leftMenu">
@@ -39,14 +38,33 @@ export default class Sider extends React.Component{
                               <a onClick={this.closeLeftMenu} href="#/registration" className="w3-bar-item w3-button menu-link">Sign up</a>
                                 <a onClick={this.closeLeftMenu} href="#/login" className="w3-bar-item w3-button menu-link">Log in</a>
                               </div>
-                              :
-                              <div>
-                                  <a onClick={this.closeLeftMenu} href="#/home" className="w3-bar-item w3-button menu-link">Home</a>
-                                  <a onClick={this.closeLeftMenu} href="#/userList" className="w3-bar-item w3-button menu-link">Users</a>
-                                <a onClick={this.closeLeftMenu} href="#/registration" className="w3-bar-item w3-button menu-link">Profile</a>
-                                  <a onClick={this.logoutfun} href="#/login" className="w3-bar-item w3-button menu-link">Logout</a>
-                              </div>
+                              :""
                             }
+
+                            { window.localStorage.getItem("userDetails") != null &&
+                               window.localStorage.getItem("userDetails") != "" &&
+                               JSON.parse(window.localStorage.getItem("userDetails"))["role_name"]==="account" ?
+                               <div>
+                                    <a onClick={this.closeLeftMenu} href="#/home" className="w3-bar-item w3-button menu-link">Home</a>
+                                    <a onClick={this.closeLeftMenu} href="#/userList" className="w3-bar-item w3-button menu-link">Users</a>
+                                    <a onClick={this.closeLeftMenu} href="#/registration" className="w3-bar-item w3-button menu-link">Profile</a>
+                                    <a onClick={this.closeLeftMenu} href="#/event" className="w3-bar-item w3-button menu-link">Event</a>
+                                    <a onClick={this.closeLeftMenu} href="#/addFlatContribution" className="w3-bar-item w3-button menu-link">Add Flat Contribution</a>
+                                    <a onClick={this.closeLeftMenu} href="#/receiveContribution" className="w3-bar-item w3-button menu-link">Receive Contribution</a>
+                                    <a onClick={this.closeLeftMenu} href="#/viewContribution" className="w3-bar-item w3-button menu-link">View Contribution</a>
+                                    <a onClick={this.logoutfun} href="#/login" className="w3-bar-item w3-button menu-link">Logout</a>
+                                </div>:""}
+                                { window.localStorage.getItem("userDetails") != null &&
+                                   window.localStorage.getItem("userDetails") != "" &&
+                                   JSON.parse(window.localStorage.getItem("userDetails"))["role_name"]==="user" ?
+                                <div>
+                                     <a onClick={this.closeLeftMenu} href="#/home" className="w3-bar-item w3-button menu-link">Home</a>
+                                     <a onClick={this.closeLeftMenu} href="#/userList" className="w3-bar-item w3-button menu-link">Users</a>
+                                     <a onClick={this.closeLeftMenu} href="#/registration" className="w3-bar-item w3-button menu-link">Profile</a>
+                                     <a onClick={this.closeLeftMenu} href="#/viewContribution" className="w3-bar-item w3-button menu-link">View Contribution</a>
+                                     <a onClick={this.logoutfun} href="#/login" className="w3-bar-item w3-button menu-link">Logout</a>
+                                 </div>:""
+                              }
 
                 </div>
                     <div className="w3-teal">

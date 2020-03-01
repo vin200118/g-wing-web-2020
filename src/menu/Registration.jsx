@@ -14,6 +14,7 @@ export default class Registration extends React.Component{
   constructor(props) {
         super(props);
         this.state = {
+            registartionBtnDisabled:false,
             password:null,
             id:0,
             flatNo:"",
@@ -79,54 +80,33 @@ export default class Registration extends React.Component{
             }
 
             signUp(){
-                this.setState({loader:true});
+                this.setState({loader:true, registartionBtnDisabled:true});
+                let message="";
                 const headers = {
                     'Content-Type': 'application/json',
                 }
 
                 if(this.state.flatNo === "" ){
+                  message = "select flat no.";
+                }else if(this.state.newPassword === "" ){
+                  message = "enter new password";
+                }else if(this.state.confirmPassword === "" ){
+                    message = "enter confirm password";
+                }else if(this.state.fullName === "" ){
+                    message = "enter full name";
+                }else if(this.state.contactNo1 === "" ){
+                    message = "enter contact no1";
+                }else if(this.state.newPassword !== this.state.confirmPassword){
+                    message = "new password and confirm password should be match";
+                }
+                if(message !== ""){
                   this.setState({
-                      message:"select flat no.",
+                      message:message,
                       variant:"danger",
-                      loader:false
+                      loader:false,
+                      registartionBtnDisabled:false
                   })
                   return;
-                }else if(this.state.newPassword === "" ){
-                  this.setState({
-                      message:"enter new password",
-                      variant:"danger",
-                      loader:false
-                  })
-                    return;
-                }else if(this.state.confirmPassword === "" ){
-                  this.setState({
-                      message:"enter confirm password",
-                      variant:"danger",
-                      loader:false
-                  })
-                    return;
-                }else if(this.state.fullName === "" ){
-                  this.setState({
-                      message:"enter full name",
-                      variant:"danger",
-                      loader:false
-                  })
-                    return;
-                }else if(this.state.contactNo1 === "" ){
-                  this.setState({
-                      message:"enter contact no1",
-                      variant:"danger",
-                      loader:false
-                  })
-                    return;
-                }
-                if(this.state.newPassword !== this.state.confirmPassword){
-                  this.setState({
-                      message:"new password and confirm password should be match",
-                      variant:"danger",
-                      loader:false
-                  })
-                    return;
                 }
                 this.setState({
                     message:"",
@@ -154,6 +134,7 @@ export default class Registration extends React.Component{
                                    this.setState({
                                        message:"Profile updated successfully.",
                                        variant:"success",
+                                       registartionBtnDisabled:false,
                                        loader:false
                                    })
                                 }else{
@@ -166,12 +147,14 @@ export default class Registration extends React.Component{
                                   this.setState({
                                       message:error.response.data,
                                       variant:"danger",
+                                      registartionBtnDisabled:false,
                                       loader:false
                                   })
                               }else {
                                   this.setState({
                                       message: "ERROR:Registration failed, please contact to Admin",
                                       variant: "danger",
+                                      registartionBtnDisabled:false,
                                       loader:false
                                   })
                               }
@@ -225,7 +208,7 @@ export default class Registration extends React.Component{
            <label for="contactNo2">Contact No2</label><span class="note-message">optional</span>
        </div>
      </div>
-     <a class="waves-effect waves-light btn-small" onClick={this.signUp}>{this.state.submitButtonTitle}</a>
+     <a disabled={this.state.registartionBtnDisabled} class="waves-effect waves-light btn-small" onClick={this.signUp}>{this.state.submitButtonTitle}</a>
        <div className="spinnerEvent">
                       {this.state.loader?
                           <Spinner  name="three-bounce" color="Black"/>:""
