@@ -56,7 +56,8 @@ export default class Sider extends React.Component{
                                 </div>:""}
                                 { window.localStorage.getItem("userDetails") != null &&
                                    window.localStorage.getItem("userDetails") != "" &&
-                                   JSON.parse(window.localStorage.getItem("userDetails"))["role_name"]==="user" ?
+                                   (JSON.parse(window.localStorage.getItem("userDetails"))["role_name"]==="user" ||
+                                    JSON.parse(window.localStorage.getItem("userDetails"))["role_name"]===undefined) ?
                                 <div>
                                      <a onClick={this.closeLeftMenu} href="#/home" className="w3-bar-item w3-button menu-link">Home</a>
                                      <a onClick={this.closeLeftMenu} href="#/userList" className="w3-bar-item w3-button menu-link">Users</a>

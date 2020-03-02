@@ -22,6 +22,10 @@ export default class Login extends React.Component{
       }
 
       componentWillMount() {
+        if(window.localStorage.getItem("userDetails") != null &&
+           window.localStorage.getItem("userDetails") != "" ){
+               this.props.history.push("/home");
+           }
           if(this.props.location.search != undefined &&  this.props.location.search.includes("done")){
             this.setState({
                 message:"Your account created successfully...",

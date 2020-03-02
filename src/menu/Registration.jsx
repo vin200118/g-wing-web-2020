@@ -48,6 +48,8 @@ export default class Registration extends React.Component{
                          "title":"Profile",
                          "id":userInfo["user_id"],
                          "submitButtonTitle":"Update",
+                         "user_id":userInfo["user_id"],
+                         "role_id":userInfo["role_id"],
                          "role_name":userInfo["role_name"],
                        "url":"https://tam-g-wing.herokuapp.com/gwing/api/user/update"});
               }else{
@@ -132,6 +134,7 @@ export default class Registration extends React.Component{
                                   "contact_no1":this.state.contactNo1,
                                   "id":this.state.id,
                                   "role_name":this.state.role_name,
+                                  "user_id":this.state.user_id,
                                   "contact_no2":this.state.contactNo2}
                                    window.localStorage.setItem("userDetails", JSON.stringify(data));
                                    this.setState({
