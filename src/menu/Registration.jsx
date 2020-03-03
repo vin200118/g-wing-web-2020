@@ -23,6 +23,9 @@ export default class Registration extends React.Component{
             confirmPassword:"",
             contactNo1:"",
             contactNo2:"",
+            vehicleNo1:"",
+            vehicleNo2:"",
+            vehicleNo3:"",
             role_name:"",
             "title":"Profile",
             "submitButtonTitle":"Update",
@@ -45,6 +48,9 @@ export default class Registration extends React.Component{
                             "newPassword":window.localStorage.getItem('password'),
                           "contactNo1":userInfo["contact_no1"],
                          "contactNo2":userInfo["contact_no2"],
+                         "vehicleNo1":userInfo["vehicle_no1"],
+                         "vehicleNo2":userInfo["vehicle_no2"],
+                         "vehicleNo3":userInfo["vehicle_no3"],
                          "title":"Profile",
                          "id":userInfo["user_id"],
                          "submitButtonTitle":"Update",
@@ -67,6 +73,13 @@ export default class Registration extends React.Component{
             })
           }
           }
+
+          handleChangeVehicle(e){
+              this.setState({
+                  [e.target.id]:  e.target.value
+              })
+            }
+
 
           handleChangeFullName(e){
             this.setState({
@@ -124,6 +137,9 @@ export default class Registration extends React.Component{
                 "password":this.state.newPassword,
                 "fullName":this.state.fullName,
                 "contactNo1":this.state.contactNo1,
+                "vehicleNo1":this.state.vehicleNo1,
+                "vehicleNo2":this.state.vehicleNo2,
+                "vehicleNo3":this.state.vehicleNo3,
                 "id":this.state.id,
                 "contactNo2":this.state.contactNo2},{"headers":headers})
                           .then(res => {
@@ -132,6 +148,9 @@ export default class Registration extends React.Component{
                                   "password":this.state.newPassword,
                                   "full_name":this.state.fullName,
                                   "contact_no1":this.state.contactNo1,
+                                  "vehicle_no1":this.state.vehicleNo1,
+                                  "vehicle_no2":this.state.vehicleNo2,
+                                  "vehicle_no3":this.state.vehicleNo3,
                                   "id":this.state.id,
                                   "role_name":this.state.role_name,
                                   "user_id":this.state.user_id,
@@ -212,6 +231,24 @@ export default class Registration extends React.Component{
        <div class="input-field col s6">
          <input id="contactNo2" value={this.state.contactNo2}  type="text" maxlength="10" onChange={e => this.handleChange(e)}/>
            <label for="contactNo2">Contact No2</label><span class="note-message">optional</span>
+       </div>
+     </div>
+     <div class="row">
+       <div class="input-field col s6">
+         <input id="vehicleNo1" value={this.state.vehicleNo1}  type="text" onChange={e => this.handleChangeVehicle(e)}/>
+           <label for="vehicleNo1">Vehicle No1</label><span class="note-message">optional</span>
+       </div>
+     </div>
+     <div class="row">
+       <div class="input-field col s6">
+         <input id="vehicleNo2" value={this.state.vehicleNo2}  type="text" onChange={e => this.handleChangeVehicle(e)}/>
+           <label for="vehicleNo2">Vehicle No2</label><span class="note-message">optional</span>
+       </div>
+     </div>
+     <div class="row">
+       <div class="input-field col s6">
+         <input id="vehicleNo3" value={this.state.vehicleNo3}  type="text" onChange={e => this.handleChangeVehicle(e)}/>
+           <label for="vehicleNo3">Vehicle No3</label><span class="note-message">optional</span>
        </div>
      </div>
      <a disabled={this.state.registartionBtnDisabled} class="waves-effect waves-light btn-small" onClick={this.signUp}>{this.state.submitButtonTitle}</a>
