@@ -93,7 +93,7 @@ handleSearch(e){
           <td>{index}</td>
            <td>{listValue.date}</td>
            <td>{listValue.expensesname}</td>
-           <td>{listValue.expensesamount}</td>
+           <td>{listValue.expensesamt}</td>
            <td><ViewExpensesDialog expensesDetails={listValue}/></td>
          </tr>
        );
