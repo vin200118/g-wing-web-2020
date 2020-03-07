@@ -48,7 +48,7 @@ handleSearch(e){
   for (var i=0; i < this.state.data.length; i++) {
     let isSearch=false;
     Object.entries(this.state.data[i]).forEach(entry => {
-        if (entry[0] !="exp_id" && entry[1] != undefined && entry[1] != "" && entry[1] != null
+        if (entry[0] !="expid" && entry[1] != undefined && entry[1] != "" && entry[1] != null
          && entry[1].toLowerCase().includes(searchValue.toLowerCase()) && !isSearch){
             filterData.push(this.state.data[i]);
             isSearch=true;
