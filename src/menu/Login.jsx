@@ -77,7 +77,7 @@ export default class Login extends React.Component{
                           })
                       }else {
                           this.setState({
-                              message: "ERROR:Registration failed, please contact to Admin",
+                              message: "ERROR:please contact to Admin",
                               variant: "danger",
                               loader:false,
                               loginBtnDisabled:false

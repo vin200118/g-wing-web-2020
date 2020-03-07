@@ -65,7 +65,7 @@ componentDidMount(){
                      })
                  }else {
                      this.setState({
-                         message: "ERROR:Registration failed, please contact to Admin",
+                         message: "ERROR:please contact to Admin",
                          variant: "danger",
                          loader:false
                      })
@@ -96,7 +96,7 @@ handleChangeEvent(e){
                     })
                 }else {
                     this.setState({
-                        message: "ERROR:Fetch event contribution failed, please contact to Admin",
+                        message: "ERROR:please contact to Admin",
                         variant: "danger",
                         loader:false
                     })
@@ -139,7 +139,7 @@ addContribution(){
                     })
                 }else {
                     this.setState({
-                        message: "ERROR:Registration failed, please contact to Admin",
+                        message: "ERROR:please contact to Admin",
                         variant: "danger",
                         loader:false
                     })

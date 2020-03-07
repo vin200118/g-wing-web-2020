@@ -61,7 +61,7 @@ export default class ReceiveContribution extends React.Component{
                          })
                      }else {
                          this.setState({
-                             message: "ERROR:Registration failed, please contact to Admin",
+                             message: "ERROR:please contact to Admin",
                              variant: "danger",
                              loader:false
                          })
@@ -97,7 +97,7 @@ export default class ReceiveContribution extends React.Component{
                         })
                     }else {
                         this.setState({
-                            message: "ERROR:Fetch event contribution failed, please contact to Admin",
+                            message: "ERROR:please contact to Admin",
                             variant: "danger",
                             loader:false
                         })
@@ -144,7 +144,7 @@ export default class ReceiveContribution extends React.Component{
                          })
                      }else {
                          this.setState({
-                             message: "ERROR:Registration failed, please contact to Admin",
+                             message: "ERROR:please contact to Admin",
                              variant: "danger",
                              receiveContributionDisabled:false,
                              loader:false

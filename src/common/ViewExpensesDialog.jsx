@@ -10,7 +10,7 @@ import Slide from '@material-ui/core/Slide';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-export default class ShowUserDetailDialog extends React.Component{
+export default class ViewExpensesDialog extends React.Component{
   constructor(props) {
       super(props);
       this.state = {
@@ -29,7 +29,7 @@ export default class ShowUserDetailDialog extends React.Component{
   };
 
 render(){
-  const userDetails = this.props.userDetails;
+  const expenseDetail = this.props.expensesDetails;
   return (
     <div>
     <Button onClick={this.handleClickOpen}  class="btn waves-effect waves-light">
@@ -46,30 +46,23 @@ render(){
 
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-          <table class="striped userDetailsDialogTable">
+          <table class="striped viewExpensesDialogTable">
           <tbody>
+            <tr>
+                 <td class="viewExpensesDialogTable">Date</td><td>{expenseDetail.date}</td>
+            </tr>
           <tr>
-               <td class="userDetailsDialogTabletd">Flat No.</td><td>{userDetails.flat_no}</td>
+               <td class="viewExpensesDialogTable">Expense Name</td><td>{expenseDetail.expensesname}</td>
           </tr>
           <tr>
-               <td class="userDetailsDialogTabletd">Full Name</td><td>{userDetails.full_name}</td>
+               <td class="viewExpensesDialogTable">Expense Amount</td><td>{expenseDetail.expensesamt}</td>
           </tr>
           <tr>
-               <td class="userDetailsDialogTabletd">Contact No1</td><td>{userDetails.contact_no1}</td>
+               <td class="viewExpensesDialogTable">Paid To</td><td>{expenseDetail.paidto}</td>
           </tr>
           <tr>
-               <td class="userDetailsDialogTabletd">Contact No2</td><td>{userDetails.contact_no2}</td>
+               <td class="viewExpensesDialogTable">Paid By</td><td>{expenseDetail.paidby}</td>
           </tr>
-          <tr>
-               <td class="userDetailsDialogTabletd">Vehicle No1</td><td>{userDetails.vehicle_no1}</td>
-          </tr>
-          <tr>
-               <td class="userDetailsDialogTabletd">Vehicle No2</td><td>{userDetails.vehicle_no2}</td>
-          </tr>
-          <tr>
-               <td class="userDetailsDialogTabletd">Vehicle No3</td><td>{userDetails.vehicle_no3}</td>
-          </tr>
-
            </tbody>
          </table>
           </DialogContentText>

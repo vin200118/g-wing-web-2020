@@ -52,7 +52,9 @@ export default class Sider extends React.Component{
                                     <a onClick={this.closeLeftMenu} href="#/addFlatContribution" className="w3-bar-item w3-button menu-link">Add Flat Contribution</a>
                                     <a onClick={this.closeLeftMenu} href="#/receiveContribution" className="w3-bar-item w3-button menu-link">Receive Contribution</a>
                                     <a onClick={this.closeLeftMenu} href="#/viewContribution" className="w3-bar-item w3-button menu-link">View Contribution</a>
-                                    <a onClick={this.logoutfun} href="#/login" className="w3-bar-item w3-button menu-link">Logout</a>
+                                    <a onClick={this.closeLeftMenu} href="#/addExpenses" className="w3-bar-item w3-button menu-link">Add Expenses</a>
+                                      <a onClick={this.closeLeftMenu} href="#/viewExpenses" className="w3-bar-item w3-button menu-link">View Expenses</a>
+                                  <a onClick={this.logoutfun} href="#/login" className="w3-bar-item w3-button menu-link">Logout</a>
                                 </div>:""}
                                 { window.localStorage.getItem("userDetails") != null &&
                                    window.localStorage.getItem("userDetails") != "" &&
@@ -63,7 +65,8 @@ export default class Sider extends React.Component{
                                      <a onClick={this.closeLeftMenu} href="#/userList" className="w3-bar-item w3-button menu-link">Users</a>
                                      <a onClick={this.closeLeftMenu} href="#/registration" className="w3-bar-item w3-button menu-link">Profile</a>
                                      <a onClick={this.closeLeftMenu} href="#/viewContribution" className="w3-bar-item w3-button menu-link">View Contribution</a>
-                                     <a onClick={this.logoutfun} href="#/login" className="w3-bar-item w3-button menu-link">Logout</a>
+                                    <a onClick={this.closeLeftMenu} href="#/viewExpenses" className="w3-bar-item w3-button menu-link">View Expenses</a>
+                                   <a onClick={this.logoutfun} href="#/login" className="w3-bar-item w3-button menu-link">Logout</a>
                                  </div>:""
                               }
 

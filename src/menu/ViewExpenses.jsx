@@ -2,9 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import AlertCom from "../AlertCom";
 import Spinner from 'react-spinkit';
-import ShowUserDetailDialog from '../common/ShowUserDetailDialog';
-  import TextField from '@material-ui/core/TextField';
-export default class UserList extends React.Component{
+import ViewExpensesDialog from '../common/ViewExpensesDialog'
+export default class ViewExpenses extends React.Component{
 
   constructor(props) {
       super(props);
@@ -22,9 +21,8 @@ export default class UserList extends React.Component{
 
 
       this.setState({loader:true});
-    axios.get("https://tam-g-wing.herokuapp.com/gwing/api/user")
+    axios.get("https://tam-g-wing.herokuapp.com/gwing/api/expenses")
               .then(res => {
-              res.data.sort((a, b) => (parseInt(a.flat_no.replace("G-","")) > parseInt(b.flat_no.replace("G-",""))) ? 1 : -1)
                   this.setState({"data":res.data,"searchData":res.data,loader:false});
                 }).catch(error => {
 
@@ -50,7 +48,7 @@ handleSearch(e){
   for (var i=0; i < this.state.data.length; i++) {
     let isSearch=false;
     Object.entries(this.state.data[i]).forEach(entry => {
-        if (entry[0] !="user_id" && entry[1] != undefined && entry[1] != "" && entry[1] != null
+        if (entry[0] !="exp_id" && entry[1] != undefined && entry[1] != "" && entry[1] != null
          && entry[1].toLowerCase().includes(searchValue.toLowerCase()) && !isSearch){
             filterData.push(this.state.data[i]);
             isSearch=true;
@@ -62,7 +60,7 @@ handleSearch(e){
   render(){
     return (
       <div>
-        <h6 class="headline">List of Flat Owners:  <div className="spinnerEvent">
+        <h6 class="headline">All Expense:  <div className="spinnerEvent">
                          {this.state.loader?
                              < Spinner  name="three-bounce" color="Black"/>:""
                        }
@@ -80,8 +78,9 @@ handleSearch(e){
 
           <tr>
               <th>No</th>
-              <th>Flat No</th>
-              <th>Full Name</th>
+              <th>Date</th>
+              <th>Expense Name</th>
+              <th>Amount</th>
               <th>...</th>
           </tr>
         </thead>
@@ -92,9 +91,10 @@ handleSearch(e){
 
          <tr key={index++}>
           <td>{index}</td>
-           <td>{listValue.flat_no}</td>
-           <td>{listValue.full_name}</td>
-           <td><ShowUserDetailDialog userDetails={listValue}/></td>
+           <td>{listValue.date}</td>
+           <td>{listValue.expensesname}</td>
+           <td>{listValue.expensesamount}</td>
+           <td><ViewExpensesDialog expensesDetails={listValue}/></td>
          </tr>
        );
      })}

@@ -10,6 +10,8 @@ import Event from "./menu/Event";
 import AddFlatContribution from "./menu/AddFlatContribution";
 import ReceiveContribution from "./menu/ReceiveContribution";
 import ViewFlatContribution from "./menu/ViewFlatContribution";
+import AddExpenses from "./menu/AddExpenses";
+import ViewExpenses from "./menu/ViewExpenses";
 export default class Main extends React.Component{
     render() {
         return(
@@ -24,6 +26,8 @@ export default class Main extends React.Component{
                             <Route path="/addFlatContribution" component={AddFlatContribution}/>
                             <Route path="/receiveContribution" component={ReceiveContribution}/>
                             <Route path="/viewContribution" component={ViewFlatContribution}/>
+                              <Route path="/addExpenses" component={AddExpenses}/>
+                                <Route path="/viewExpenses" component={ViewExpenses}/>
 
                     </HashRouter>
                 </div>
